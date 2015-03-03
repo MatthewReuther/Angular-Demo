@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en-US" ng-app>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>My Title</title>
+    <link rel="stylesheet" href="css/main.css">
+  </head>
+  <body ng-init="names=['Scott','Ashley','Bob','Julie']">
+    <!--[if lt IE 9]>
+      <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <div class="container" ng-init="enemies=['TAdam','ZAdam','JuAdam','BrAdam']">
+
+      Sort:
+      <button ng-click="friendReverse=!friendReverse">Change Sort</button>            <!--creating a variable that toggles friends names alphabetically -->
+
+      <!--<button ng-click="friendReverse=false">ZYX</button> -->                     <!--creating a variable that flips friends names alphabetically between two buttons-->
+      <!--<button ng-click="friendReverse=true">ZYX</button> -->
+
+      <div class="hellofriends" ng-repeat="name in enemies | orderBy:'':friendReverse">
+        <h1>Hello {{name}}</h1>
+      </div>
+      Place: <input ng-model="place">
+    </div>
+
+    <script src="bower_components/angular/angular.min.js"></script>
+    <script src="js/main.js"></script>
+  </body>
+</html>
