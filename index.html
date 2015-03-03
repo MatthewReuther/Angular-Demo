@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en-US" ng-app>
+<html lang="en-US" ng-app="tas-angular-demo">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,28 +7,31 @@
     <title>My Title</title>
     <link rel="stylesheet" href="css/main.css">
   </head>
-  <body ng-init="names=['Scott','Ashley','Bob','Julie']">
+  <body>                                                                              <!--ng-init="names=['Scott','Ashley','Bob','Julie']" -->
     <!--[if lt IE 9]>
       <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 
-    <div class="container" ng-init="tas=['TAdam','ZAdam','JuAdam','BrAdam']">
-      New TA:                                                                                      <!-- added new TA input and save button that will add name to the Tas array by using tas.push -->
+    <div class="container" ng-controller="tasController">
+      New TA:                                                                 <!-- added new TA input and save button that will add name to the Tas array by using tas.push-->
         <input ng-model="newTAName">
         <button ng-click="tas.push(newTAName)">Save</button>
 
-      Search: <input ng-model="friendFilterQuery">                                                 <!--friendFilter whatever typed in this function will search for through the names in our ta's array -->
+      Search: <input ng-model="friendFilterQuery">                      <!--friendFilter whatever typed in this function will search for through the names in our ta's array -->
       Sort:
-      <button ng-click="friendReverse=!friendReverse">Change Sort</button>                         <!--creating a variable that toggles friends names alphabetically-->
+      <button ng-click="friendReverse=!friendReverse">Change Sort</button>       <!--creating a variable that toggles friends names alphabetically-->
 
-      <!--<button ng-click="friendReverse=false">ZYX</button> -->                                  <!--creating a variable that flips friends names alphabetically between two buttons-->
+      <!--<button ng-click="friendReverse=false">ZYX</button> -->              <!--creating a variable that flips friends names alphabetically between two buttons-->
       <!--<button ng-click="friendReverse=true">ZYX</button> -->
 
       <div class="hellofriends" ng-repeat="name in tas
          | filter:friendFilterQuery
-         | orderBy:'':friendReverse">                                                              <!--added a text filter that makes all of the names in the name array capitol-->
-        <h1 style="display: inline">Hello {{name | uppercase}}</h1>                                <!--added style display inline to be able to have X button appear near names-->
-        <button ng-click="tas.splice(tas.indexOf(name),1)">X</button>                              <!--added an X button upon click it takes the index of item then splices it then removes it from the array.-->
+         | orderBy:'':friendReverse">                                            <!--added a text filter that makes all of the names in the name array capitol-->
+      <h1 style="display: inline">Hello {{name | uppercase}}</h1>                <!--added style display inline to be able to have X button appear near names-->
+
+        <!--<button ng-click="tas.splice(tas.indexOf(name),1)">X</button>  <added an X button upon click it takes the index of item then splices it then removes it from the array.-->
+
+        <button ng-click="removeTA(name)">X</button>                                <!--pass it a name then remove it-->
       </div>
     </div>
 
