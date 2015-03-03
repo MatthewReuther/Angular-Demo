@@ -12,18 +12,24 @@
       <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 
-    <div class="container" ng-init="enemies=['TAdam','ZAdam','JuAdam','BrAdam']">
+    <div class="container" ng-init="tas=['TAdam','ZAdam','JuAdam','BrAdam']">
+      New TA:                                                                                      <!-- added new TA input and save button that will add name to the Tas array by using tas.push -->
+        <input ng-model="newTAName">
+        <button ng-click="tas.push(newTAName)">Save</button>
 
+      Search: <input ng-model="friendFilterQuery">                                                 <!--friendFilter whatever typed in this function will search for through the names in our ta's array -->
       Sort:
-      <button ng-click="friendReverse=!friendReverse">Change Sort</button>            <!--creating a variable that toggles friends names alphabetically -->
+      <button ng-click="friendReverse=!friendReverse">Change Sort</button>                         <!--creating a variable that toggles friends names alphabetically-->
 
-      <!--<button ng-click="friendReverse=false">ZYX</button> -->                     <!--creating a variable that flips friends names alphabetically between two buttons-->
+      <!--<button ng-click="friendReverse=false">ZYX</button> -->                                  <!--creating a variable that flips friends names alphabetically between two buttons-->
       <!--<button ng-click="friendReverse=true">ZYX</button> -->
 
-      <div class="hellofriends" ng-repeat="name in enemies | orderBy:'':friendReverse">
-        <h1>Hello {{name}}</h1>
+      <div class="hellofriends" ng-repeat="name in tas
+         | filter:friendFilterQuery
+         | orderBy:'':friendReverse">                                                              <!--added a text filter that makes all of the names in the name array capitol-->
+        <h1 style="display: inline">Hello {{name | uppercase}}</h1>                                <!--added style display inline to be able to have X button appear near names-->
+        <button ng-click="tas.splice(tas.indexOf(name),1)">X</button>                              <!--added an X button upon click it takes the index of item then splices it then removes it from the array.-->
       </div>
-      Place: <input ng-model="place">
     </div>
 
     <script src="bower_components/angular/angular.min.js"></script>
