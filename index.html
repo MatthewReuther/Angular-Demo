@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en-US" ng-app="tas-angular-demo">
+<html lang="en-US" ng-app="tas">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,32 +7,53 @@
     <title>My Title</title>
     <link rel="stylesheet" href="css/main.css">
   </head>
-  <body>                                                                              <!--ng-init="names=['Scott','Ashley','Bob','Julie']" -->
+  <body>
     <!--[if lt IE 9]>
       <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 
-    <div class="container" ng-controller="tasController">
-      New TA:                                                                 <!-- added new TA input and save button that will add name to the Tas array by using tas.push-->
-        <input ng-model="newTAName">
-        <button ng-click="tas.push(newTAName)">Save</button>
-
-      Search: <input ng-model="friendFilterQuery">                      <!--friendFilter whatever typed in this function will search for through the names in our ta's array -->
+    <div class="container" ng-controller="TasController as tas">
+      <h1>My TAddress Book</h1>
+      <form name="tas.newTA" ng-submit="tas.addTA()">
+        <label>First:</label>
+        <input ng-model="tas.newTA.firstName" required>
+        <label>Last:</label>
+        <input ng-model="tas.newTA.lastName" required>
+        <label>Current:</label>
+        <input type="checkbox" ng-model="tas.newTA.current">
+        <input type="submit" value="Save">
+      </form>
+      <br>
+      Search: <input ng-model="friendFilterQuery">
+      <br>
       Sort:
-      <button ng-click="friendReverse=!friendReverse">Change Sort</button>       <!--creating a variable that toggles friends names alphabetically-->
-
-      <!--<button ng-click="friendReverse=false">ZYX</button> -->              <!--creating a variable that flips friends names alphabetically between two buttons-->
-      <!--<button ng-click="friendReverse=true">ZYX</button> -->
-
-      <div class="hellofriends" ng-repeat="name in tas
-         | filter:friendFilterQuery
-         | orderBy:'':friendReverse">                                            <!--added a text filter that makes all of the names in the name array capitol-->
-      <h1 style="display: inline">Hello {{name | uppercase}}</h1>                <!--added style display inline to be able to have X button appear near names-->
-
-        <!--<button ng-click="tas.splice(tas.indexOf(name),1)">X</button>  <added an X button upon click it takes the index of item then splices it then removes it from the array.-->
-
-        <button ng-click="removeTA(name)">X</button>                                <!--pass it a name then remove it-->
-      </div>
+      <button ng-click="friendReverse=!friendReverse">Change Sort</button>
+      <br>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Nick Name</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Current</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="hellofriends" ng-repeat="person in tas.data
+            | filter:friendFilterQuery
+            | orderBy:['current','-nickName']:friendReverse">
+            <td>{{person.name}}</td>
+            <td>{{person.nickName | uppercase}}</td>
+            <td>{{person.firstName}}</td>
+            <td>{{person.lastName}}</td>
+            <td><input type="checkbox" disabled ng-checked={{person.current}}></td>
+            <td>
+              <button ng-click="tas.removeTA(person)">X</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
 
     <script src="bower_components/angular/angular.min.js"></script>
