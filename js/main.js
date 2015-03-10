@@ -1,5 +1,38 @@
 angular
-  .module('tas', [])
+  .module('tas', ['ngRoute'])    //importing first model which is ng-route give you $route and $route provider
+  .config(function ($routeProvider) {
+    $routeProvider      //setting up four routes ---routes are the actual url on a page www.google.com/images images is the route
+      .when('/tas', {
+        templateUrl: 'views/table.html', ///both accpets a path and a route
+        controller: 'TasController',
+        controllerAs: 'tas'
+      })
+      .when('/tas/new', {
+        templateUrl: 'views/form.html',
+        controller: 'TasController',
+        controllerAs: 'tas'
+      })
+      .when('/tas/:uuid', {     //dynamic route looks like regular route but they have colon and id is now a variable you can use
+        templateUrl: 'views/show.html',
+        controller: 'ShowController',
+        controllerAs: 'show'
+      })
+      .otherwise({
+        redirectTo: '/tas'
+      })
+  })
+
+  .controller ('ShowController', function ($routeParams, $http) { //rout Params this is how you can access your uuid
+    var vm = this,
+        id = $routeParams.uuid;       //whatever you write in line 15 where uuid is this will be here
+
+    $http
+      .get('https://angular-demo-tas.firebaseio.com/tas/' + id + '.json')
+      .success(function (data) {
+        vm.ta = data;
+      })
+  })
+
   .controller('TasController', function ($scope, $http) {
     var vm = this;
 
@@ -73,20 +106,19 @@ angular
 
       console.log(vm.newTA);
       $http.post('https://angular-demo-tas.firebaseio.com/tas.json', vm.newTA)
-        .success(function (data) {
-          vm.data[data.name] = vm.newTA;
+        .success(function (res) {
+          vm.data[res.name] = vm.newTA;
           _clearNewTA();
-        })
+        });
     };
+
     vm.removeTA = function (id) {
-      // var index = vm.data.indexOf(person);       //use when not posting to firebase
-      // vm.data.splice(index, 1);
       var url = 'https://angular-demo-tas.firebaseio.com/tas/' + id + '.json';
       $http
         .delete(url)
         .success(function () {
           delete vm.data[id];
-        })
+        });
     };
 
     vm.updateTA = function (id) {
@@ -95,10 +127,9 @@ angular
         .put(url, vm.data[id]);
     };
 
-
     function _clearNewTA() {
       vm.newTA = {};
-      $scope.newTA.$setPristine();
+      $scope.newTAForm.$setPristine();
     }
 
   });
