@@ -1,3 +1,14 @@
-/*input.ng-dirty {
-	background: #f0af8b;
-}*/
+/*
+input.ng-dirty {
+ background: #f0af8b;
+}
+*/
+.index--thumbnail {
+  max-width: 150px;
+  max-height: 150px;
+}
+
+img {
+  max-width: 650px;
+  max-height: 650px;
+}
