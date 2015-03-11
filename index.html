@@ -15,12 +15,27 @@
 
     <div class="container">
       <h1><a href="/#/tas">My TAddress Book</a></h1>
+      <br>
+      Search: <input ng-model="friendFilterQuery">
+      <br>
+      Sort:
+      <button class="btn btn-primary" ng-click="friendReverse=!friendReverse">Change Sort</button>
       <a class="btn btn-primary" href="/#/tas/new">New TA</a>
       <div ng-view></div>
     </div>
 
     <script src="bower_components/angular/angular.min.js"></script>
     <script src="bower_components/angular-route/angular-route.min.js"></script>
-    <script src="js/main.js"></script>
+    <script src="js/main.module.js"></script>
+    <script src="js/auth/auth.config.js"></script>
+    <script src="js/main.config.js"></script>
+    <script src="js/main.constants.js"></script>
+    <script src="js/main.filters.js"></script>
+    <script src="js/auth/auth.controller.js"></script>
+    <script src="js/tas/ta.factory.js"></script>
+    <script src="js/tas/edit.controller.js"></script>
+    <script src="js/tas/show.controller.js"></script>
+    <script src="js/tas/ta.controller.js"></script>
   </body>
 </html>
+

@@ -12,3 +12,7 @@ img {
   max-width: 650px;
   max-height: 650px;
 }
+
+.btnSort {
+  float:right;
+}
