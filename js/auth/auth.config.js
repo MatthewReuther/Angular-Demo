@@ -8,5 +8,9 @@ function authConfig($routeProvider) {
       templateUrl: 'js/auth/login.html',
       controller: 'AuthController',
       controllerAs: 'auth'
+    })
+    .when('/logout', {
+      template: '',
+      controller: 'LogoutController'
     });
 }

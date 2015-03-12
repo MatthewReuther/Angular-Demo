@@ -30,6 +30,37 @@ function tasConfig($routeProvider) {
 }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //   .config(function ($routeProvider) {
 //     $routeProvider      //setting up four routes ---routes are the actual url on a page www.google.com/images images is the route
 //       .when('/tas', {
