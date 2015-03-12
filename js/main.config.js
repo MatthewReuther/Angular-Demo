@@ -7,25 +7,30 @@ function tasConfig($routeProvider) {
     .when('/tas', {
       templateUrl: 'js/tas/table.html',
       controller: 'TasController',
-      controllerAs: 'tas'
+      controllerAs: 'tas',
+      private: true
     })
     .when('/tas/new', {
       templateUrl: 'js/tas/form.html',
       controller: 'TasController',
-      controllerAs: 'tas'
+      controllerAs: 'tas',
+      private: true
     })
     .when('/tas/:uuid', {
       templateUrl: 'js/tas/show.html',
       controller: 'ShowController',
-      controllerAs: 'show'
+      controllerAs: 'show',
+      private: true
     })
     .when('/tas/:uuid/edit', {
       templateUrl: 'js/tas/form.html',
       controller: 'EditController',
-      controllerAs: 'tas'
+      controllerAs: 'tas',
+      private: true
     })
     .otherwise({
-      redirectTo: '/tas'
+      redirectTo: '/tas',
+      private: true
     });
 }
 
